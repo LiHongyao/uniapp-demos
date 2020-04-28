@@ -1,0 +1,93 @@
+<template>
+	<view class="video"  @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+		<video class="video" :id="`video_${src}`" :src="src" :controls="controls" :show-play-btn="false" :style="{ height, width }"
+		 :loop="true" :enable-progress-gesture="false" objectFit="cover">
+		</video>
+		<!-- 播放按钮 -->
+		<!-- <cover-image class="play-button"  src="../static/imgs/videos/icon-play.png" v-if="!play"></cover-image> -->
+		<!-- 进度条 -->
+		<cover-view class="progress-bar" :style="{ width: barWidth }"></cover-view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				time: 0,
+				duration: 0,
+				playFirst: true,
+				isClick: false,
+				startY: 0,
+				endY: 0
+			}
+		},
+		mounted() {
+			// 获取视频上下文
+			this.videoCtx = uni.createVideoContext(`video_${this.src}`, this);
+		},
+		methods: {
+			touchStart(event) {
+				// console.log('start:',event.touches[0].pageY)
+			},
+			touchMove(event) {
+				// console.log('move:',event.touches[0].pageY)
+				
+			},
+			touchEnd(event) {
+				// console.log('end:',event.touches) 
+			},
+			// 播放视频
+			videoPlay() {
+				if (this.play) {
+					this.videoCtx.play();
+				} else {
+					this.videoCtx.pause();
+				}
+			},
+			tapVideo() {
+				this.$emit('tapEvent');
+			}
+		},
+		watch: {
+			play(newVal, oldVal) {
+				this.videoPlay();
+			}
+		},
+		props: {
+			controls: {
+				type: Boolean,
+				default: false
+			},
+			src: {
+				type: String,
+				default: ''
+			},
+			play: {
+				type: Boolean,
+				default: false
+			},
+			height: {
+				type: String,
+				default: ''
+			},
+			width: {
+				type: String,
+				default: ''
+			}
+		}
+	}
+</script>
+
+<style scoped>
+	.video {
+		justify-content: center;
+		align-items: center;
+	}
+
+	.play-button {
+		width: 50upx;
+		height: 50upx;
+		position: absolute;
+	}
+</style>
