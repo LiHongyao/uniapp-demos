@@ -1,136 +1,147 @@
 <template>
-<view class="container">
-	<list
-		@loadmore="getData()"
-		:loadmoreoffset="wHeight * 3" 
-		:show-scrollbar="false" 
-		ref="listBox" 
-		:pagingEnabled="true" 
-		:scrollable="true"
-	>
-		<cell v-for="(item,i) in dataList" :key="i">
-			<view ref="item" class="item"  :style="boxStyle">
-				<jVideo
-					v-if="Math.abs(k - i)<=1"
-					ref="video"
-					:state="item.state"
-					:src="item.dyVideoUrl"
-					:boxStyle="boxStyle"
-				></jVideo>
-				<view class="videoHover" v-if="1" @click="tapVideoHover(item.state,$event)" :style="boxStyle">
-				  	<image v-if="item.state=='pause'" class="playState" src="../static/play.png"></image>
-				</view>
-				<!-- 顶栏 - begin -->
-				<view class="top-bar">
-					<!-- 导航栏 -->
-					<view class="top-nav" @click="tapBack">
-						<image class="top-nav-back" src="../static/imgs/videos/icon-back.png"></image>
-						<text class="top-nav-title text-theme">{{item.dyVideoTitle}}</text>
-					</view>
-					<!-- 月销量 -->
-					<view class="top-sales">
-						<image class="top-music-image" src="http://qn.xqtsc.cc/icon/home/remai_gf.gif "></image>
-						<text class="top-sales-text text-theme">月销 {{item.itemSale}}</text>
-					</view>
-				</view>
-				<!-- 顶栏 - end -->
-				<!-- 侧栏 - begin -->
-				<view class="slide-bar" @appear="k=i">
-					<!-- 点赞 -->
-					<view class="slide-item" @click="tapFabulous">
-						<image class="icon-fabulous" src="../static/imgs/videos/icon-fabulous.png" mode="aspectFill"></image>
-						<text class="slide-text">{{item.dyVideoLikeCount}}</text>
-					</view>
-					<!-- 文案 -->
-					<view class="slide-item" @click="tapCopywriting">
-						<image class="icon-copywriting" src="../static/imgs/videos/icon-copywriting.png" mode="aspectFill"></image>
-						<text class="slide-text">文案</text>
-					</view>
-					<!-- 分享 -->
-					<view class="slide-item" @click="tapShare">
-						<image class="icon-share" src="../static/imgs/videos/icon-share.png" mode="aspectFill"></image>
-						<text class="slide-text">分享</text>
-					</view>
-				</view>
-				<!-- 侧栏 - end -->
-				<!-- 商品 - begin -->
-				<view class="bottom-bar" @click="tapGoods">
-					<image class="goods-image" :src="item.itemPic" mode="aspectFill"></image>
-					<view class="goods-infos">
-						<image class="goods-image-buy" src="../static/imgs/videos/buy.png" mode="aspectFill"></image>
-						<text class="goods-title text-theme">{{item.itemTitle}}</text>
-						<view class="goods-price-box">
-							<text class="goods-yen text-theme">&#xa5;</text>
-							<text class="goods-present-price text-theme">{{item.salePrice}}</text>
-							<text class="goods-original-price text-theme">&#xa5;{{item.itemPrice}}</text>
-						</view>
-						<view class="goods-bottom">
-							<view class="goods-ddou">
-								<image class="goods-ddou-icon" src="../static/imgs/videos/ddou.png"></image>
-								<text class="goods-ddou-text text-theme">预计可赚{{item.dbeanIncome}}D豆</text>
-							</view>
-							<view class="goods-coupon">
-								<image class="goods-coupon-bg" src="../static/imgs/videos/bar-coupon.png"></image>
-								<text class="goods-coupon-text">&#xa5;{{item.couponMoney}}券</text>
-							</view>
-						</view>
-					</view>
+	<view class="container">
+		<list 
+			:loadmoreoffset="wHeight * 3"
+			:show-scrollbar="false"  
+			:pagingEnabled="true"
+			:scrollable="true"
+			@loadmore="getData()"
+		>
+			<cell v-for="(item, index) in dataList" :key="index">
+				<view ref="item" class="item" :style="boxStyle">
 					
+					<lihy-video 
+						v-if="Math.abs(curIndex - index) <= 1" 
+						ref="video" 
+						:state="item.state" 
+						:src="item.dyVideoUrl" 
+						:boxStyle="boxStyle" 
+					/>
+					<!-- 播放/暂停遮罩 - begin -->
+					<view 
+						class="video-hover-mask" 
+						:style="boxStyle"
+						@click="tapVideoHoverMask(item.state, $event)" 
+						@appear="curIndex = index"
+					>
+						<image v-if="item.state=='pause'" class="playState" src="../static/imgs/icon-play.png" />
+					</view>
+					<!-- 播放/暂停遮罩 - end -->
+					
+					<!-- 顶栏 - begin -->
+					<view class="top-bar">
+						<!-- 导航栏 -->
+						<view class="top-nav" @click="tapBack">
+							<image class="top-nav-back" src="../static/imgs/icon-back.png"></image>
+							<text class="top-nav-title text-theme">{{item.dyVideoTitle}}</text>
+						</view>
+						<!-- 月销量 -->
+						<view class="top-sales">
+							<image class="top-music-image" src="http://qn.xqtsc.cc/icon/home/remai_gf.gif "></image>
+							<text class="top-sales-text text-theme">月销 {{item.itemSale}}</text>
+						</view>
+					</view>
+					<!-- 顶栏 - end -->
+					
+					<!-- 侧栏 - begin -->
+					<view class="slide-bar">
+						<!-- 点赞 -->
+						<view class="slide-item" @click="tapFabulous">
+							<image class="icon-fabulous" src="../static/imgs/icon-fabulous.png" mode="aspectFill"></image>
+							<text class="slide-text">{{item.dyVideoLikeCount}}</text>
+						</view>
+						<!-- 文案 -->
+						<view class="slide-item" @click="tapCopywriting">
+							<image class="icon-copywriting" src="../static/imgs/icon-copywriting.png" mode="aspectFill"></image>
+							<text class="slide-text">文案</text>
+						</view>
+						<!-- 分享 -->
+						<view class="slide-item" @click="tapShare">
+							<image class="icon-share" src="../static/imgs/icon-share.png" mode="aspectFill"></image>
+							<text class="slide-text">分享</text>
+						</view>
+					</view>
+					<!-- 侧栏 - end -->
+					
+					<!-- 商品 - begin -->
+					<view class="bottom-bar" @click="tapGoods">
+						<image class="goods-image" :src="item.itemPic" mode="aspectFill"></image>
+						<view class="goods-infos">
+							<image class="goods-image-buy" src="../static/imgs/buy.png" mode="aspectFill"></image>
+							<text class="goods-title text-theme">{{item.itemTitle}}</text>
+							<view class="goods-price-box">
+								<text class="goods-yen text-theme">&#xa5;</text>
+								<text class="goods-present-price text-theme">{{item.salePrice}}</text>
+								<text class="goods-original-price text-theme">&#xa5;{{item.itemPrice}}</text>
+							</view>
+							<view class="goods-bottom">
+								<view class="goods-ddou">
+									<image class="goods-ddou-icon" src="../static/imgs/ddou.png"></image>
+									<text class="goods-ddou-text text-theme">预计可赚{{item.dbeanIncome}}D豆</text>
+								</view>
+								<view class="goods-coupon">
+									<image class="goods-coupon-bg" src="../static/imgs/bar-coupon.png"></image>
+									<text class="goods-coupon-text">&#xa5;{{item.couponMoney}}券</text>
+								</view>
+							</view>
+						</view>
+
+					</view>
+					<!-- 商品 - end -->
 				</view>
-				<!-- 商品 - end -->
-			</view>
-		</cell>
-	</list>
-</view>
+			</cell>
+		</list>
+	</view>
 </template>
 <script>
-const dom = weex.requireModule('dom');
-const BindingX = uni.requireNativePlugin('bindingx');
-import jVideo from './li-video.nvue';
-export default {
-		components: {jVideo},
-        data: {
-			dataList:[],
-			scrollTop:0,
-			oldScrollTop:0,
-			wHeight:0,
-			boxStyle:{
-				'height':0,
-				'width':'750upx',
+	const dom = weex.requireModule('dom');
+	const BindingX = uni.requireNativePlugin('bindingx');
+	import lihyVideo from '../components/lihy-video.nvue';
+	import {
+		fetchData
+	} from './data.js';
+	export default {
+		data: {
+			dataList: [],
+			wHeight: 0,
+			boxStyle: {
+				'height': 0,
+				'width': '750upx',
 			},
-			k:0,
-			playIngIds:[],//正在播放的视频id列队，列队用于处理滑动过快导致的跳频问题
-			ready:false,
-			//isDragging:false//用户是否正在拖动列表
-        },
-		watch:{
-			k(k,old_k){
-				this.dataList[k].state = 'play'
-				this.dataList[old_k].state = 'stop'
+			curIndex: 0
+		},
+		watch: {
+			curIndex(curIndex, old_curIndex) {
+				this.dataList[curIndex].state = 'play'
+				this.dataList[old_curIndex].state = 'stop'
 			},
 		},
-		onShow(){
+		onShow() {
 			console.log('回到前台');
+			
 		},
-		onHide(){
+		onHide() {
 			console.log('到后台');
-			//this.$refs.video[this.k].pause();
-			// this.dataList[0].state = 'pause'
+			// this.$refs.video[this.k].pause();
+			this.dataList[0].state = 'pause'
 		},
-		onLoad(){
+		onLoad() {
+			// 锁定屏幕方向
+			// #ifdef APP-PLUS-NVUE
+			plus.screen.lockOrientation('portrait-primary');
+			// #endif
 			this.wHeight = uni.getSystemInfoSync().windowHeight;
 			this.boxStyle.height = this.wHeight;
-			console.log(this.wHeight);
+			
 			let _this = this;
-			this.getData(() => { 
-				// _this.$refs.video[0].play();
-				this.$nextTick(function(){
-					this.dataList[0].state = 'play'
+			this.getData(() => {
+				this.$nextTick(function() {
+					// _this.$refs.video.play();
+					// this.dataList[0].state = 'play'
 				});
-				_this.ready = true;
 			});
 		},
-        methods: {
+		methods: {
 			tapBack() {
 				console.log('__tapBack__');
 			},
@@ -145,59 +156,31 @@ export default {
 			},
 			tapGoods() {
 				console.log('__tapGoods__');
-				uni.navigateTo({
-					url:"other"
-				})
 			},
-			// ------------------------------
-			//点击播放&&暂停
-			tapVideoHover(state,event){
-				console.log('state--',state);
-				if(state=='play'|| state=='continue'){
-					this.dataList[this.k].state = 'pause';
-				}else{
-					this.dataList[this.k].state = 'continue';
+			tapVideoHoverMask(state, event) {
+				if (state === 'play' || state === 'continue') {
+					this.dataList[this.curIndex].state = 'pause';
+				} else {
+					this.dataList[this.curIndex].state = 'continue';
 				}
 			},
-			getData(callback){
-				// for (let i = 0; i < 100; i++) {
-				// 	this.dataList.push({
-				// 		state : 'pause',
-					
-				// 		src : 'http://video-haodanku-com.cdn.fudaiapp.com/9c59c198f6948082afae1eb768bfb417.mp4?attname=1588000335.mp4',
-					
-				// 	});
-				// }
-				// setTimeout(e=>{//模拟接口请求时间为1秒
-				// 	callback()
-				// },1000);
+			getData(callback) {
 				let _this = this;
-				uni.request({
-					url: 'http://192.168.101.106:8888/hdk/goods',
-					method: 'POST',
-					data: {
-					  "page": 1,
-					  "pageSize": 20,
-					  "typeId": 0
-					},
-					success(res) {
-						const videos = res.data.data;
-						console.log(videos[0])
-						videos.forEach(item => {
-							item.salePrice = (item.itemPrice - item.couponMoney).toFixed(2);
-							item.state  = 'pause';
-						});
-						_this.dataList.push(...videos);
-						callback();
-					}
+				const videos = fetchData.data;
+				videos.forEach(item => {
+					item.salePrice = (item.itemPrice - item.couponMoney).toFixed(2);
+					item.state = 'pause';
 				});
+				_this.dataList.push(...videos);
+				callback();
 			}
-        }
-    }
+		},
+		components: {
+			lihyVideo
+		}
+	}
 </script>
 <style>
-	
-	
 	
 	/* 「通用样式 - begin」 */
 	.text-theme {
@@ -205,63 +188,96 @@ export default {
 	}
 	/* 「通用样式 - end」 */
 	
+	/* 容器样式 - begin */
+	.container {
+		flex: 1;
+		background-color: #eeeeee;
+	}
+	
+	.item {
+		flex: 1;
+		background-color: #000000;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
+	/* 容器样式 - end */
+	
+	/* 播放/暂停 - begin */
+	.video-hover-mask {
+		position: absolute;
+		top: 0;
+		left: 0;
+		flex: 1;
+		background-color: rgba(0, 0, 0, .1);
+		justify-content: center;
+		align-items: center;
+	}
+	
+	.playState {
+		width: 80upx;
+		height: 80upx;
+	}
+	/* 播放/暂停 - end */
+	
+	
+
 	/* 「顶部模块 - begin」 */
-		.top-bar {
-			width: 750upx;
-			padding: 0 28upx;
-			position: absolute;
-			top: 102upx;
-			left: 0;
-		}
-	
-		.top-nav {
-			width: 750upx;
-			height: 100upx;
-			justify-content: center;
-			align-items: flex-start;
-		}
-	
-		.top-nav-back {
-			width: 26.82upx;
-			height: 49.66upx;
-			position: absolute;
-			top: 25upx;
-			left: 0;
-		}
-	
-		.top-nav-title {
-			height: 36upx;
-			padding: 0 40upx;
-			font-size: 30upx;
-			font-weight: bold;
-			text-overflow: ellipsis;
-		}
-	
-		.top-sales {
-			width: 230upx;
-			height: 36upx;
-			padding: 0 28upx;
-			margin-top: 32upx;
-			border-radius: 26upx;
-			background-color: rgba(255, 160, 0, .75);
-	
-			flex-direction: row;
-			justify-content: center;
-			align-items: center;
-		}
-	
-		.top-music-image {
-			width: 28upx;
-			height: 28upx;
-			margin-right: 12upx;
-		}
-	
-		.top-sales-text {
-			font-size: 24upx;
-		}
-	
-		/* 「顶部模块 - end」 */
-		
+	.top-bar {
+		width: 750upx;
+		flex-direction: column;
+		padding: 0 28upx;
+		position: absolute;
+		top: 102upx;
+		left: 0;
+	}
+
+	.top-nav {
+		flex: 1;
+		height: 100upx;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.top-nav-back {
+		width: 25upx;
+		height: 43upx;
+	}
+
+	.top-nav-title {
+		flex: 1;
+		height: 36upx;
+		padding-left: 12upx;
+		font-size: 34upx;
+		font-weight: bold;
+		text-overflow: ellipsis;
+	}
+
+	.top-sales {
+		width: 230upx;
+		height: 36upx;
+		padding: 0 28upx;
+		border-radius: 26upx;
+		background-color: rgba(255, 160, 0, .75);
+
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.top-music-image {
+		width: 28upx;
+		height: 28upx;
+		margin-right: 12upx;
+	}
+
+	.top-sales-text {
+		font-size: 24upx;
+	}
+
+	/* 「顶部模块 - end」 */
+
 	/* 「侧栏样式 - begin」 */
 	.slide-bar {
 		position: absolute;
@@ -275,6 +291,11 @@ export default {
 		align-items: center;
 		z-index: 9999;
 	}
+	
+	.slide-item {
+		align-items: center;
+	}
+
 	.slide-text {
 		text-align: center;
 		font-size: 24upx;
@@ -297,15 +318,15 @@ export default {
 		width: 44upx;
 		height: 35.8upx;
 	}
+
 	/* 「右侧图标 - end」 */
-	
-	
+
+
 	/* 「底部商品 - begin」 */
 	.bottom-bar {
 		width: 750upx;
 		height: 342upx;
 		background-color: rgba(41, 41, 41, .75);
-		opacity: .75;
 		padding: 34upx 30upx 112upx 26upx;
 
 		flex-direction: row;
@@ -414,35 +435,7 @@ export default {
 		font-size: 24upx;
 		position: absolute;
 	}
+
 	/* 「底部商品 - end」 */
-	
-	
-	
-	/* ----------------------------------------------- */
-    .container {flex: 1;background-color: #eeeeee;}
-    .item {
-		width : 750upx;
-		background-color: #000000;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-	}
-	.videoHover{
-		position: absolute;
-		top: 0;
-		left: 0;
-		flex: 1;
-		background-color: rgba(0,0,0,0.1);
-		/* background-color: red; */
-		justify-content: center;
-		align-items: center;
-		
-		/* border-style: dashed;
-		border-color: #DD524D;
-		border-width: 1px; */
-	}
-	.playState{
-		width:  80upx;
-		height: 80upx;
-	}
+
 </style>

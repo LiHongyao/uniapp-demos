@@ -1,0 +1,81 @@
+<template>
+	<view class="root">
+		<video 
+			ref="myVideos" 
+			id="lihy-video"
+			:objectFit="objectFit"
+			:loop="true" 
+			:src="src" 
+			:enable-progress-gesture="false" 
+			:page-gesture="false" 
+			:initial-time="initialTime" 
+			:controls="controls" 
+			:show-fullscreen-btn="false"
+			:show-center-play-btn="false" 
+			:style="boxStyle" 
+		/>
+	</view>
+</template>
+
+<script>
+	export default {
+		watch: {
+			state(newValue, oldValue) {
+				setTimeout(() => {
+					let videoContext = uni.createVideoContext('lihy-video', this);
+					switch (newValue) {
+						case 'play':
+							videoContext.seek(0);
+							videoContext.play();
+							break;
+						case 'continue':
+							videoContext.play();
+							break;
+						case 'pause':
+							videoContext.pause();
+							break;
+						case 'stop':
+							videoContext.seek(0);
+							videoContext.pause();
+							break;
+						default:
+							break;
+					}
+				}, 300)
+			}
+		},
+		props: {
+			state: {
+				type: String,
+				default: "stop"
+			},
+			src: {
+				type: String,
+				default: ""
+			},
+			boxStyle: {
+				type: Object,
+				default: {}
+			},
+			objectFit: {
+				type: String,
+				default: "fill"
+			},
+			controls: {
+				type: Boolean,
+				default: false
+			},
+			initialTime: {
+				type: Number,
+				default: 0
+			}
+		},
+	}
+</script>
+
+<style>
+	.root {
+		background-color: #000000;
+		position: relative;
+	}
+</style>

@@ -3,21 +3,14 @@
 		{
 			"path": "pages/index",
 			"style": {
-				"navigationBarTitleText": "vertical-swiper",
 				"app-plus":{
 					"titleNView":{
 						"type":"transparent"
 					}
 				}
 			}
-		},
-		{
-			"path":"pages/other",
-			"style":{
-				"navigationBarTitleText":"商品详情"
-			}
-		}
-	],
+		} 
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

@@ -1,0 +1,28 @@
+{
+    "name": "Bloom-News",
+    "id": "Bloom-News",
+    "version": "1.0.1",
+    "description": "Bloom-News 专注于解决APP变现",
+    "_dp_type":"nativeplugin",
+    "_dp_nativeplugin":{
+        "android": {
+            "plugins": [
+                {
+                    "type": "module",
+                    "name": "Bloom-News",
+                    "class": "com.linkin.newssdk.uniplugin.NewsWXModule"
+                }
+            ],
+            "integrateType": "aar",
+            "dependencies": [
+            ],
+            "abis": [
+            ],
+            "minSdkVersion": "14",
+            "permissions": [
+            ],
+            "parameters": {
+            }
+        }
+    }
+}

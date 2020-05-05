@@ -1,0 +1,29 @@
+{
+    "name": "Bloom-AD",
+    "id": "Bloom-AD",
+    "version": "1.0.1",
+    "description": "Bloom-AD 专注于解决APP变现",
+    "_dp_type":"nativeplugin",
+    "_dp_nativeplugin":{
+        "android": {
+            "plugins": [
+                {
+                    "type": "module",
+                    "name": "Bloom-AD",
+                    "class": "com.linkin.adsdk.uniplugin.AdWXModule"
+                }
+            ],
+            "integrateType": "aar",
+            "dependencies": [
+            ],
+            "abis": [
+                "armeabi-v7a", "arm64-v8a"
+            ],
+            "minSdkVersion": "14",
+            "permissions": [
+            ],
+            "parameters": {
+            }
+        }
+    }
+}

@@ -13,7 +13,5 @@
 </script>
 
 <style>
-	 /* #ifdef APP-PLUS */
 	
-	 /* #endif */
 </style>
