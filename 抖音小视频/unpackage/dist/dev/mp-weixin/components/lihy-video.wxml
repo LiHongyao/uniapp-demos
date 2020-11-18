@@ -1,0 +1,1 @@
+<view class="root"><video class="vue-ref" style="{{(boxStyle)}}" id="lihy-video" objectFit="{{objectFit}}" loop="{{true}}" src="{{src}}" enable-progress-gesture="{{false}}" page-gesture="{{false}}" initial-time="{{initialTime}}" controls="{{controls}}" show-fullscreen-btn="{{false}}" show-center-play-btn="{{false}}" data-ref="myVideos"></video></view>

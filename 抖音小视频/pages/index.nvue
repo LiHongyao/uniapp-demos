@@ -9,7 +9,6 @@
 		>
 			<cell v-for="(item, index) in dataList" :key="index">
 				<view ref="item" class="item" :style="boxStyle">
-					
 					<lihy-video 
 						v-if="Math.abs(curIndex - index) <= 1" 
 						ref="video" 

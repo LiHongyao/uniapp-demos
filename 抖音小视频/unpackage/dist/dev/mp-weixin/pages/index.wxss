@@ -1,0 +1,553 @@
+
+view,
+swiper-item,
+scroll-view {
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-box-orient:vertical;
+  -webkit-box-direction:normal;
+  -webkit-flex-direction:column;
+          flex-direction:column;
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+          flex-grow: 0;
+  -webkit-flex-basis: auto;
+          flex-basis: auto;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+          align-items: stretch;
+  -webkit-align-content: flex-start;
+          align-content: flex-start;
+}
+view,
+image,
+input,
+scroll-view,
+swiper,
+swiper-item,
+text,
+textarea,
+video {
+  position: relative;
+  border: 0px solid #000000;
+  box-sizing: border-box;
+}
+swiper-item {
+  position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 「通用样式 - begin」 */
+.text-theme {
+	color: #FFFFFF;
+}
+/* 「通用样式 - end」 */
+/* 容器样式 - begin */
+.container {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	background-color: #eeeeee;
+}
+.item {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	background-color: #000000;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	position: relative;
+}
+/* 容器样式 - end */
+/* 播放/暂停 - begin */
+.video-hover-mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	background-color: rgba(0, 0, 0, .1);
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.playState {
+	width: 80rpx;
+	height: 80rpx;
+}
+/* 播放/暂停 - end */
+/* 「顶部模块 - begin」 */
+.top-bar {
+	width: 750rpx;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	padding: 0 28rpx;
+	position: absolute;
+	top: 102rpx;
+	left: 0;
+}
+.top-nav {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 100rpx;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: start;
+	-webkit-justify-content: flex-start;
+	        justify-content: flex-start;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.top-nav-back {
+	width: 25rpx;
+	height: 43rpx;
+}
+.top-nav-title {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	height: 36rpx;
+	padding-left: 12rpx;
+	font-size: 34rpx;
+	font-weight: bold;
+	text-overflow: ellipsis;
+}
+.top-sales {
+	width: 230rpx;
+	height: 36rpx;
+	padding: 0 28rpx;
+	border-radius: 26rpx;
+	background-color: rgba(255, 160, 0, .75);
+
+	-webkit-box-orient: horizontal;
+
+	-webkit-box-direction: normal;
+
+	-webkit-flex-direction: row;
+
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.top-music-image {
+	width: 28rpx;
+	height: 28rpx;
+	margin-right: 12rpx;
+}
+.top-sales-text {
+	font-size: 24rpx;
+}
+/* 「顶部模块 - end」 */
+/* 「侧栏样式 - begin」 */
+.slide-bar {
+	position: absolute;
+	bottom: 486rpx;
+	right: 40rpx;
+
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	z-index: 9999;
+}
+.slide-item {
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.slide-text {
+	text-align: center;
+	font-size: 24rpx;
+	color: #FFFFFF;
+	margin-top: 10rpx;
+	margin-bottom: 40rpx;
+}
+.icon-fabulous {
+	height: 44rpx;
+	width: 40rpx;
+}
+.icon-copywriting {
+	width: 37.36rpx;
+	height: 44rpx;
+}
+.icon-share {
+	width: 44rpx;
+	height: 35.8rpx;
+}
+/* 「右侧图标 - end」 */
+/* 「底部商品 - begin」 */
+.bottom-bar {
+	width: 750rpx;
+	height: 342rpx;
+	background-color: rgba(41, 41, 41, .75);
+	padding: 34rpx 30rpx 112rpx 26rpx;
+
+	-webkit-box-orient: horizontal;
+
+	-webkit-box-direction: normal;
+
+	-webkit-flex-direction: row;
+
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+
+
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+.goods-image {
+	width: 176rpx;
+	height: 196rpx;
+	background-color: #eeeeee;
+	border-radius: 12rpx;
+}
+.goods-infos {
+	position: relative;
+	width: 506rpx;
+	height: 196rpx;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.goods-image-buy {
+	width: 92rpx;
+	height: 56.76rpx;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.goods-title {
+	width: 368rpx;
+	height: 80rpx;
+	text-overflow: ellipsis;
+	line-height: 40rpx;
+	font-size: 28rpx;
+}
+.goods-price-box {
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.goods-yen {
+	font-size: 24rpx;
+	position: relative;
+	top: 6rpx;
+}
+.goods-present-price {
+	font-size: 40rpx;
+	margin: 0 12rpx;
+}
+.goods-original-price {
+	font-size: 20rpx;
+	text-decoration: line-through;
+	position: relative;
+	top: 4px;
+}
+.goods-bottom {
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+}
+.goods-ddou {
+	width: 308rpx;
+	height: 44rpx;
+	background-image: -webkit-linear-gradient(left, #FFA200, #FF4600);
+	background-image: linear-gradient(to right, #FFA200, #FF4600);
+	border-radius: 8rpx;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.goods-ddou-icon {
+	width: 32rpx;
+	height: 32rpx;
+}
+.goods-ddou-text {
+	font-size: 24rpx;
+	margin-left: 22rpx;
+}
+.goods-coupon {
+	width: 172.28rpx;
+	height: 44rpx;
+	margin-left: 12rpx;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+}
+.goods-coupon-bg {
+	width: 172.28rpx;
+	height: 44rpx;
+}
+.goods-coupon-text {
+	color: #FFA000;
+	font-size: 24rpx;
+	position: absolute;
+}
+/* 「底部商品 - end」 */
+
+
